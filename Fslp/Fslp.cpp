@@ -103,3 +103,13 @@ void Fslp::analogReset()
     loop_until_bit_is_clear(ADCSRA, ADSC);
 #endif
 }
+
+int Fslp::fixedPressure(int _pressure)
+{
+  if(_pressure >= 32 * 1023 || _pressure < 0){
+    return 0;
+  }
+  else{
+    return _pressure;
+  }
+}

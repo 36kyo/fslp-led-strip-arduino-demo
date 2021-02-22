@@ -42,6 +42,7 @@ class Fslp{
     Fslp(int _fslpSenseLine, int _fslpDriveLine1, int _fslpDriveLine2, int _fslpBotR0);
     int fslpGetPosition();
     int fslpGetPressure();
+    int fixedPressure(int _pressure);
     void analogReset();
     
   private:

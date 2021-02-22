@@ -1,4 +1,4 @@
-#define USE_SERIAL_PLOTTER// , split print
+#define USE_SERIAL_PLOTTER// , split print  
 
 #include <Fslp.h>
 #include <PololuLedStrip.h>
@@ -29,6 +29,7 @@ void loop()
   int pressure, position;
 
   pressure = fslp.fslpGetPressure();
+  pressure = fslp.fixedPressure( pressure );
 
   if (pressure == 0)
   {
