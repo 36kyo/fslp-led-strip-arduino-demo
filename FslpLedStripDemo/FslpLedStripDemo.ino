@@ -1,5 +1,6 @@
-#include <Fslp.h>
+#define USE_SERIAL_PLOTTER// , split print
 
+#include <Fslp.h>
 #include <PololuLedStrip.h>
 PololuLedStrip<12> ledStrip;
 #define LED_COUNT 60
@@ -19,7 +20,7 @@ Fslp fslp = Fslp(fslpSenseLine, fslpDriveLine1, fslpDriveLine2, fslpBotR0);
 
 void setup()
 {
-  Serial.begin(9600);
+  Serial.begin(115200);
   delay(250);
 }
 
@@ -41,10 +42,13 @@ void loop()
   }
 
   char report[80];
+#ifndef USE_SERIAL_PLOTTER
   sprintf(report, "pressure: %5d   position: %5d\n",
     pressure, position);
   Serial.print(report);
-
+#else
+  Serial.println(String(pressure) + "," + String(position));
+#endif
   // Scale the position reading to be from 0 to the
   // number of LEDs.
   int adjustedPosition = (int32_t)position * LED_COUNT / 1000;
